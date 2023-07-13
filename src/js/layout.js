@@ -8,6 +8,7 @@ import { Navbar } from './component/navbar'
 import { Footer } from './component/footer'
 import ShowData from './views/home'
 import { DetailView } from './views/single'
+import WookieTalkie from './views/wookieTalkie'
 
 //create your first component
 const Layout = () => {
@@ -23,6 +24,7 @@ const Layout = () => {
           <Routes>
             <Route path="/" element={<ShowData />} />
             <Route path="/:category/:id" element={<DetailView />} />
+            <Route path="/wookie-talkie" element={<WookieTalkie />} />
             <Route path="*" element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />
