@@ -72,22 +72,78 @@ const getState = ({ getStore, getActions, setStore }) => {
           vehicles_next,
         })
       },
+      // getDataFromApi: async () => {
+      //   const starWarsContent =
+      //     JSON.parse(localStorage.getItem('starWarsContent')) || {}
+
+      //   if (Object.keys(starWarsContent).length === 0) {
+      //     const peopleUrl = `${URL_FETCH}/people`
+      //     const planetsUrl = `${URL_FETCH}/planets`
+      //     const starshipsUrl = `${URL_FETCH}/starships`
+      //     const speciesUrl = `${URL_FETCH}/species`
+      //     const vehiclesUrl = `${URL_FETCH}/vehicles`
+
+      //     const fetchData = async (url) => {
+      //       const response = await fetch(url)
+      //       const data = await response.json()
+      //       return data
+      //     }
+
+      //     const [planets, people, starships, species, vehicles] =
+      //       await Promise.all([
+      //         fetchData(planetsUrl),
+      //         fetchData(peopleUrl),
+      //         fetchData(starshipsUrl),
+      //         fetchData(speciesUrl),
+      //         fetchData(vehiclesUrl),
+      //       ])
+
+      //     starWarsContent.planets = planets.results
+      //     starWarsContent.people = people.results
+      //     starWarsContent.starships = starships.results
+      //     starWarsContent.species = species.results
+      //     starWarsContent.vehicles = vehicles.results
+
+      //     localStorage.setItem(
+      //       'starWarsContent',
+      //       JSON.stringify(starWarsContent)
+      //     )
+      //   }
+
+      //   const { planets, people, starships, species, vehicles } =
+      //     starWarsContent
+
+      //   setStore({
+      //     planets,
+      //     people,
+      //     starships,
+      //     species,
+      //     vehicles,
+      //     planets_next: planets.next,
+      //     people_next: people.next,
+      //     starships_next: starships.next,
+      //     species_next: species.next,
+      //     vehicles_next: vehicles.next,
+      //   })
+      // },
       getDetailData: async ({ type, id }) => {
         const url = `${URL_FETCH}/${type}/${id}`
 
-        fetch(url)
-          .then((response) => response.json())
-          .then((data) => {
-            const detailData = {
-              ...data.result.properties,
-              description: data.result.description,
-              uid: data.result.uid,
-            }
+        try {
+          const response = await fetch(url)
+          const data = await response.json()
+          const detailData = {
+            ...data.result.properties,
+            description: data.result.description,
+            uid: data.result.uid,
+          }
 
-            setStore({ detailData })
+          setStore({ detailData })
 
-            localStorage.setItem('detailData', JSON.stringify(detailData))
-          })
+          localStorage.setItem('detailData', JSON.stringify(detailData))
+        } catch (err) {
+          console.error(err)
+        }
       },
       getMoreData: async (url, type) => {
         fetch(url)
@@ -108,6 +164,36 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .catch((err) => console.error(err))
       },
+      // getMoreData: async (url, type) => {
+      //   fetch(url)
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       const existingData = [...getStore()[type]]
+      //       const newData = data.results
+
+      //       const uniqueNewData = newData.filter((newItem) => {
+      //         return !existingData.some(
+      //           (existingItem) => existingItem.uid === newItem.uid
+      //         )
+      //       })
+
+      //       const updatedData = existingData.concat(uniqueNewData)
+
+      //       setStore({ [type]: updatedData, [`${type}_next`]: data.next })
+
+      //       const starWarsContent =
+      //         JSON.parse(localStorage.getItem('starWarsContent')) || {}
+      //       starWarsContent[type] = updatedData
+      //       console.log(starWarsContent[type])
+      //       console.log(updatedData)
+      //       starWarsContent[`${type}_next`] = data.next
+      //       localStorage.setItem(
+      //         'starWarsContent',
+      //         JSON.stringify(starWarsContent)
+      //       )
+      //     })
+      //     .catch((err) => console.error(err))
+      // },
       searchData: async (name, type) => {
         fetch(`${URL_FETCH}/${type}/?name=${name}`)
           .then((response) => response.json())

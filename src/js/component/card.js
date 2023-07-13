@@ -2,6 +2,9 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NotFound from '../../img/star_wars_404.png'
 import { Context } from '../Store/appContext'
+import { toastConfig } from '../../utils/toastConfig'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Card = ({ element, type, searchId }) => {
   const { actions } = useContext(Context)
@@ -11,9 +14,17 @@ const Card = ({ element, type, searchId }) => {
   const isFavorite = actions.isFavorite(element.name)
 
   const handleFavorite = () => {
-    if (isFavorite) return actions.deleteFavorite(element.name)
-
-    return actions.addFavorite(element.name, type, element.uid || searchId)
+    try {
+      if (isFavorite) {
+        actions.deleteFavorite(element.name)
+      } else {
+        toast.success('Added to favorites! 😃', toastConfig)
+        actions.addFavorite(element.name, type, element.uid || searchId)
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error('Error updating favorites. Please try again.', toastConfig)
+    }
   }
 
   const arrayType = type === 'people' ? 'characters' : type
@@ -33,6 +44,7 @@ const Card = ({ element, type, searchId }) => {
       className="mx-2 mb-4 col-3 max-w-sm bg-black border border-white rounded-lg "
       style={{ width: '16rem', height: '23rem' }}
     >
+      <ToastContainer />
       <img
         className="rounded-t-lg border-b border-white"
         src={`https://starwars-visualguide.com/assets/img/${arrayType}/${

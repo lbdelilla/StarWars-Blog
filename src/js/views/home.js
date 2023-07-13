@@ -3,10 +3,14 @@ import { Context } from '../Store/appContext'
 import LightSaber from '../../img/lightsaber.png'
 import Planet from '../../img/planet.png'
 import Starship from '../../img/starship.png'
-import Background from '../../img/background-starwars.jpg'
+import Vehicles from '../../img/vehicles.png'
+import Species from '../../img/species.png'
 import Card from '../component/card'
 import List from '../component/list'
 import SearchBar from '../component/searchBar'
+import { toastConfig } from '../../utils/toastConfig'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ShowData = () => {
   const { store, actions } = useContext(Context)
@@ -18,8 +22,17 @@ const ShowData = () => {
   const vehicles_next_page = store.vehicles_next
   const species_next_page = store.species_next
 
-  const handleClick = (type, url) => {
-    actions.getMoreData(type, url)
+  const handleClick = async (type, url) => {
+    try {
+      await actions.getMoreData(type, url)
+      toast.success(
+        'More loaded correctly! 😃 You should keep right! 👉',
+        toastConfig
+      )
+    } catch (error) {
+      console.error(error)
+      toast.error('Error loading more data. Please try again.', toastConfig)
+    }
   }
 
   const searchType = store.searchType
@@ -27,6 +40,7 @@ const ShowData = () => {
   return (
     <>
       <section className="bg-starwars">
+        <ToastContainer />
         <SearchBar />
       </section>
       {hasSearchResults ? (
@@ -64,7 +78,8 @@ const ShowData = () => {
                 onClick={() => {
                   handleClick(people_next_page, 'people')
                 }}
-                className="text-white hover:text-yellow-500 cursor-pointer"
+                type="button"
+                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
               >
                 Load More...
               </button>
@@ -86,7 +101,8 @@ const ShowData = () => {
                 onClick={() => {
                   handleClick(planets_next_page, 'planets')
                 }}
-                className="text-white hover:text-yellow-500 cursor-pointer"
+                type="button"
+                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
               >
                 Load More...
               </button>
@@ -108,7 +124,8 @@ const ShowData = () => {
                 onClick={() => {
                   handleClick(starships_next_page, 'starships')
                 }}
-                className="text-white hover:text-yellow-500 cursor-pointer"
+                type="button"
+                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
               >
                 Load More...
               </button>
@@ -119,7 +136,7 @@ const ShowData = () => {
               Vehicles{' '}
               <img
                 className="mx-3"
-                src={LightSaber}
+                src={Vehicles}
                 alt="cute light saber image"
                 style={{ width: '30px' }}
               />
@@ -130,7 +147,8 @@ const ShowData = () => {
                 onClick={() => {
                   handleClick(vehicles_next_page, 'vehicles')
                 }}
-                className="text-white hover:text-yellow-500 cursor-pointer"
+                type="button"
+                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
               >
                 Load More...
               </button>
@@ -141,7 +159,7 @@ const ShowData = () => {
               Species{' '}
               <img
                 className="mx-3"
-                src={LightSaber}
+                src={Species}
                 alt="cute light saber image"
                 style={{ width: '30px' }}
               />
@@ -152,7 +170,8 @@ const ShowData = () => {
                 onClick={() => {
                   handleClick(species_next_page, 'species')
                 }}
-                className="text-white hover:text-yellow-500 cursor-pointer"
+                type="button"
+                className="focus:outline-none text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
               >
                 Load More...
               </button>
