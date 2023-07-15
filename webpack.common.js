@@ -3,7 +3,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
-module.exports = {
+export default {
   entry: ['./src/js/index.js'],
   output: {
     filename: 'bundle.js',
