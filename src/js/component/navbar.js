@@ -1,14 +1,18 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, json } from 'react-router-dom'
 import Logo from '../../img/starwars.png'
 import Wookie from '../../img/wookie.png'
 import { Context } from '../Store/appContext'
+import { toastConfig } from '../../utils/toastConfig'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const Navbar = () => {
-  const { store, actions } = useContext(Context)
-  const favorites = store.favorites
+  const { actions } = useContext(Context)
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || []
   const handleDeleteFav = (name) => {
     actions.deleteFavorite(name)
+    toast.success('Deleted from favorites! 😃', toastConfig)
   }
 
   const handleFavoriteClick = (type, id) => {
@@ -22,6 +26,7 @@ export const Navbar = () => {
 
   return (
     <nav className="bg-black border-gray-200 " id="navbar-cta">
+      <ToastContainer />
       <div className="md:max-w-screen-xl flex flex-col sm:flex-wrap md:flex-row items-center justify-between mx-auto p-4">
         <div className="flex md:justify-start justify-center w-full md:w-auto md:order-1">
           <ul className="flex flex-row  bg-black md:flex-row md:space-x-8 md:border-0 ">
@@ -95,7 +100,8 @@ export const Navbar = () => {
                       onClick={() =>
                         handleFavoriteClick(item.category, item.id)
                       }
-                      className=" block px-4 "
+                      className=" block px-4"
+                      style={{ color: 'inherit', textDecoration: 'none' }}
                     >
                       <li>{item.name}</li>
                     </Link>

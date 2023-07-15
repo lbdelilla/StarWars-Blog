@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       searchUids: [],
       species: [],
       vehicles: [],
+      isLoading: false,
     },
     actions: {
       getDataFromApi: async () => {
@@ -25,6 +26,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         const starshipsUrl = `${URL_FETCH}/starships`
         const speciesUrl = `${URL_FETCH}/species`
         const vehiclesUrl = `${URL_FETCH}/vehicles`
+
+        setStore({ isLoading: true })
 
         const fetchData = (url) =>
           fetch(url)
@@ -70,6 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           vehicles: vehiclesData,
           species_next,
           vehicles_next,
+          isLoading: false,
         })
       },
       // getDataFromApi: async () => {

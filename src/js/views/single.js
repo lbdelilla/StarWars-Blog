@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Context } from '../Store/appContext'
+import NotFound from '../../../src/img/star_wars_404.png'
 
 export const DetailView = () => {
   const { store } = useContext(Context)

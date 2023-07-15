@@ -17,6 +17,7 @@ const Card = ({ element, type, searchId }) => {
     try {
       if (isFavorite) {
         actions.deleteFavorite(element.name)
+        toast.success('Deleted from favorites! 😃', toastConfig)
       } else {
         toast.success('Added to favorites! 😃', toastConfig)
         actions.addFavorite(element.name, type, element.uid || searchId)

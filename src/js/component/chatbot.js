@@ -113,7 +113,6 @@ const Chat = () => {
 
       const data = await response.json()
       const reply = data.choices[0]?.message?.content
-      console.log(reply)
 
       newMessages.push({
         role: 'assistant',
