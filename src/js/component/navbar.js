@@ -22,9 +22,9 @@ export const Navbar = () => {
 
   return (
     <nav className="bg-black border-gray-200 " id="navbar-cta">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <div className="flex items-sta justify-start w-full md:w-auto md:order-1">
-          <ul className="flex flex-col   bg-black md:flex-row md:space-x-8 md:border-0 ">
+      <div className="md:max-w-screen-xl flex flex-col sm:flex-wrap md:flex-row items-center justify-between mx-auto p-4">
+        <div className="flex md:justify-start justify-center w-full md:w-auto md:order-1">
+          <ul className="flex flex-row  bg-black md:flex-row md:space-x-8 md:border-0 ">
             <a href="https://www.luciabelen.dev" target="_blank">
               <li className="block py-2 px-2  text-white text-2xl rounded md:bg-transparent  md:p-0 ">
                 <i className="fa-solid fa-globe"></i>
@@ -46,13 +46,13 @@ export const Navbar = () => {
           <a href="/" className="flex items-center">
             <img
               src={Logo}
-              className="mr-3"
+              className="md:mr-3"
               alt="Star Wars Logo"
               style={{ width: '220px' }}
             />
           </a>
         </div>
-        <div className="flex md:order-3">
+        <div className="flex sm:justify-center md:order-3">
           <Link
             to="/wookie-talkie"
             type="button"

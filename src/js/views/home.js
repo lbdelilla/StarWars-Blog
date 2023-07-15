@@ -11,6 +11,7 @@ import SearchBar from '../component/searchBar'
 import { toastConfig } from '../../utils/toastConfig'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Chat from '../component/chatbot'
 
 const ShowData = () => {
   const { store, actions } = useContext(Context)
@@ -177,6 +178,18 @@ const ShowData = () => {
               </button>
             </div>
           </div>
+          <div className="chatbot-container">
+            <Chat />
+          </div>
+          <style>
+            {`
+          .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+          }
+        `}
+          </style>
         </section>
       )}
     </>

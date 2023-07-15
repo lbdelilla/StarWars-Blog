@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Context } from '../Store/appContext'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
@@ -40,7 +40,7 @@ const SearchBar = () => {
           options={options}
           onChange={_onSelect}
           value={defaultOption}
-          className="bg-dark rounded-l-lg text-white"
+          className=""
         />
         <div className="relative w-full">
           <input

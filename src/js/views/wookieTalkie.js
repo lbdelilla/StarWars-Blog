@@ -47,7 +47,7 @@ const WookieTalkie = () => {
           </h5>
           <div>
             <label
-              for="textT"
+              htmlFor="textT"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Type in something...
@@ -65,7 +65,7 @@ const WookieTalkie = () => {
           </div>
           <div>
             <label
-              for="password"
+              htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Your translation...
@@ -77,6 +77,7 @@ const WookieTalkie = () => {
               placeholder="waahrascwoaoworc cooaoraaoahoowh wawocworcao..."
               className="h-40 bg-black border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               required
+              readOnly
               value={translatedText}
             />
           </div>
