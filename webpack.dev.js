@@ -17,7 +17,7 @@ if (process.env.CODESPACE_NAME) {
   publicUrl = `wss://${process.env.CODESPACE_NAME}-${port}.preview.app.github.dev/ws`
 }
 
-export default merge(common, {
+module.exports = merge(common, {
   mode: 'development',
   devtool: 'cheap-module-source-map',
   devServer: {
