@@ -1,4 +1,6 @@
 const URL_FETCH = 'https://swapi.tech/api'
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../utils/toastConfig'
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -208,8 +210,23 @@ const getState = ({ getStore, getActions, setStore }) => {
               searchData: newData,
               searchType: type,
             })
+
+            if (newData.length === 0) {
+              toast.error(
+                'No results have been found, please check for misspellings or if the category type is correct and try again.',
+                toastConfig
+              )
+            }
           })
-          .catch((err) => console.error(err))
+          .catch((err) => {
+            console.error(err)
+            toast.error(
+              'Ocurrió un error al buscar. Por favor, intenta de nuevo.',
+              {
+                autoClose: 3000,
+              }
+            )
+          })
       },
       resetSearchData: () => {
         setStore({
