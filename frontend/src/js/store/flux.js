@@ -211,7 +211,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .catch((err) => console.error(err))
       },
-
+      resetSearchData: () => {
+        setStore({
+          searchData: [],
+          searchType: '',
+        })
+      },
       addFavorite: (name, category, id) => {
         const store = getStore()
         const newFavorite = { name, category, id }

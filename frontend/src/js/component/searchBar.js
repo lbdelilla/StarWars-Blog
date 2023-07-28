@@ -4,7 +4,7 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
 const SearchBar = () => {
-  const { actions } = useContext(Context)
+  const { store, actions } = useContext(Context)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchType, setSearchType] = useState('people')
 
@@ -14,7 +14,13 @@ const SearchBar = () => {
   }
 
   const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value)
+    const value = event.target.value
+    setSearchQuery(value)
+
+    if (value.trim() === '') {
+      actions.resetSearchData()
+      setSearchQuery('')
+    }
   }
 
   const options = [
