@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NotFound from '../../img/star_wars_404.png'
-import { Context } from '../Store/appContext'
+import { Context } from '../store/appContext'
 import { toastConfig } from '../../utils/toastConfig'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import List from './list'
 import { PropagateLoader } from 'react-spinners'
-import { Context } from '../Store/appContext'
+import { Context } from '../store/appContext'
 
 const ContentSection = ({ title, image, data, type, onClickLoadMore }) => {
   const { store } = useContext(Context)

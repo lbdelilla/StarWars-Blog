@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Context } from '../Store/appContext'
+import { Context } from '../store/appContext'
 import ContentSection from '../component/contentSection'
 import Chat from '../component/chatbot'
 import Card from '../component/card'

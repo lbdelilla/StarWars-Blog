@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Context } from '../Store/appContext'
+import { Context } from '../store/appContext'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
